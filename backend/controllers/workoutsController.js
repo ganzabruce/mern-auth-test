@@ -25,6 +25,9 @@ exports.deleteOne = async(req,res)=>{
     try {
         const workout = await Workout.findOneAndDelete({_id : id})
         console.log('workout deleted')
+        if(!workout){
+            console.log('failed to delete workout', workout.error)
+        }
         res.status(200).json({message: "workout deleted successfully"})
     } catch (error) {
         res.json({error})
@@ -36,7 +39,12 @@ exports.updateOne  = async(req,res)=>{
         const workout = await Workout.findAndUpdate({_id: id},{
             ...req.body
         })
+        if(!workout){
+            console.log("failed to update the workout")
+        }
+        req.status(200).json({message: workout})
     } catch (error) {
-        
+        console.log(res)
+        return res.status(500).json({message: error.message})
     }
 }

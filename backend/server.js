@@ -10,6 +10,13 @@ app.use(express.json())
 app.use('/api/workouts/',workoutRouter)
 
 
-app.listen(port,()=>{
-    console.log(`your app is running  on port ${port}`)
-})
+mongoose.connect(process.env.DB_URL)
+ .then(()=>{
+    console.log('connected and running')
+    app.listen(port,()=>{
+        console.log(`your app is running  on port ${port}`)
+    })
+ })
+ .catch((err)=>{
+    console.log('connection error ', err)
+ })
