@@ -5,7 +5,7 @@ const port = 4000
 const workoutRouter = require('./routes/workoutRoutes')
 const mongoose = require('mongoose')
 
-
+app.use(express.urlencoded({extended:false}))
 app.use(express.json())
 app.use('/api/workouts/',workoutRouter)
 
