@@ -2,10 +2,10 @@ const express = require('express')
 const router = express.Router()
 const workoutsController = require('../controllers/workoutsController')
 
-router.get('/workouts',workoutsController.getAll)
-router.post('/workouts/create',workoutsController.createOne)
-router.delete('/workouts/delete/:id',workoutsController.deleteOne)
-router.patch('/workouts/update/:id',workoutsController.updateOne)
-
+router.get('/',workoutsController.getAll)
+router.get('/:id',workoutsController.getOne)
+router.post('/create',workoutsController.createOne)
+router.delete('/delete/:id',workoutsController.deleteOne)
+router.patch('/update/:id',workoutsController.updateOne)
 
 module.exports = router
