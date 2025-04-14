@@ -13,19 +13,20 @@ exports.createOne = async(req,res)=>{
         console.log(error.stack)
     }
 }
-exports.getAll = async(req,res)=>{
+exports.getAll = async (req,res)=>{
     try {
-        const workouts = await Workout.find()
+        const workouts = await Workout.find({})
         if(workouts.length === 0){
-            return res.status(404).json({message: "no workouts found"})
+            return res.status(200).json({message: "no workouts found"})
         }
         console.log(workouts)
-        res.status(200).json({workouts})
+        res.status(200).json(workouts)
     } catch (error) {
         console.log('internal server error ', error.stack)
         return res.status(500).json({error : error.stack})
     }
 }
+
 exports.getOne = async (req,res)=>{
     const id = req.params.id
     try {

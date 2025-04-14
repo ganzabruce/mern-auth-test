@@ -1,42 +1,35 @@
 import { useState, useEffect } from "react";  
-import WorkoutDetails from "./workoutDetails"; // Ensure correct capitalization  
-import { Link } from "react-router-dom";  
-
+import WorkoutDetails from "./workoutDetails"; 
+import UseWorkoutContext from './hooks/useWorkoutContext'
 const Home = () => {  
-    const [workouts, setWorkouts] = useState([]); // Initialize workouts as an empty array  
+    const {workouts,dispatch} = UseWorkoutContext()
     const [error, setError] = useState(null);  
-
     useEffect(() => {  
-        async function fetchWorkouts(){  
+        const fetchData = async () => {  
             try {  
-                const response = await fetch('http://localhost:4000/api/workouts/');  
-                if (!response.ok) {  
-                    throw new Error('Failed to fetch workouts');  
-                }  
-                const json = await response.json();  
-                setWorkouts(json);  
+                const response = await fetch(`http://localhost:4000/api/workouts`);  
+                const res = await response.json()
+                if(!response.ok){
+                  setError(response.error.message)
+                }
+                console.log(res)
+                dispatch({type: "getAll" ,payload: res})
             } catch (error) {  
-                setError(error.message);  
-                console.log(error.message);  
-            }  
-        }  
-        fetchWorkouts();  
-    }, []);  
+                console.error("Error fetching data:", error);  
+            } 
+        };  
+    
+        fetchData(); 
+    }, []); 
 
     return (   
         <main>  
             <h1>Workouts</h1>  
-            {error && <div className="error">{error}</div>} {/* Optional: Add a class for styling */}  
+            {error && <div className="error">{error}</div>}
             <div className="workouts">  
-                {workouts.length > 0 ? ( // Check if workouts array is not empty  
-                    workouts.map(workout => (  
-                        <Link key={workout._id} to={`/workouts/${workout._id}`} className="workout-link"> {/* Link to workout details */}  
-                            <WorkoutDetails workouts={[workout]} /> {/* Pass the single workout object */}  
-                        </Link>  
-                    ))  
-                ) : (  
-                    <div>No workouts found</div>  
-                )}  
+            {workouts && workouts.map(workout => (
+                <WorkoutDetails workout={workout} key={workout._id} />
+            ))}
             </div>  
         </main>  
     );  
