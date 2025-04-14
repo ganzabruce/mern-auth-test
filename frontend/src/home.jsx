@@ -16,6 +16,7 @@ const Home = () => {
                 dispatch({type: "getAll" ,payload: res})
             } catch (error) {  
                 console.error("Error fetching data:", error);  
+                
             } 
         };  
     
