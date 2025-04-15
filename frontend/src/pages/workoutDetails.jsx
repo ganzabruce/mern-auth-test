@@ -1,5 +1,3 @@
-
-
 const WorkoutDetails = ({ workout }) => {  
     return (  
         <>  
