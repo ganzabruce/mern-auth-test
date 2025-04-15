@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";  
 import WorkoutDetails from "./workoutDetails"; 
-import UseWorkoutContext from './hooks/useWorkoutContext'
+import { UseWorkoutContext } from "./hooks/useWorkoutContext";
 const Home = () => {  
-    const {workouts,dispatch} = UseWorkoutContext()
     const [error, setError] = useState(null);  
+    const {workouts ,dispatch} = UseWorkoutContext()
     useEffect(() => {  
         const fetchData = async () => {  
             try {  

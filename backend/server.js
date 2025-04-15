@@ -5,6 +5,7 @@ const port = 4000
 const workoutRouter = require('./routes/workoutRoutes')
 const mongoose = require('mongoose')
 const cors = require('cors')
+const userRoutes = require("./routes/userRoutes")
 
 app.use(express.urlencoded({extended:false}))
 app.use(express.json())
@@ -21,3 +22,4 @@ mongoose.connect(process.env.DB_URL)
    console.log('connection error ', err)
 })
 app.use('/api/workouts',workoutRouter)
+app.use('/api/users',userRoutes )

@@ -1,12 +1,11 @@
 import { useContext } from "react";
-import { workoutContext } from "../context/workoutsContext";
+import { WorkoutContext } from "../context/workoutContext";
 
 
-export const UseWorkoutContext = () =>{
-    const context = useContext(workoutContext)
-    if (context){
-        throw Error('no context proveided')
+export const UseWorkoutContext = ()=>{
+    const context = useContext(WorkoutContext) 
+    if(!context){
+        throw Error('no context provided')
     }
     return context
-    
 }
