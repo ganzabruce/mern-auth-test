@@ -8,10 +8,11 @@ const createToken = (_id) =>{
 }
 exports.login = async (req,res)=>{
     const {email , password} = req.body
-    if(!email || !password){
-        throw Error('all fields must be filled')
-    }
+    
     try {
+        if(!email || !password){
+            throw Error('all fields must be filled')
+        }
         const user = await User.findOne({email: email})
         if(!user){
             throw Error ("email doesn't exist")
@@ -31,22 +32,22 @@ exports.login = async (req,res)=>{
 }
 exports.signup = async (req,res)=>{
     const {email , password} = req.body
-    if(!email || !password){
-        throw Error('all fields must be filled')
-    }
-    if(!validator.isEmail(email)){
-        throw Error('invalid email')
-    }
-    if(!validator.isStrongPassword(password)){
-        throw Error('password is not strong enough')
-    }
     console.log(req.body)
     try {
+        if(!email || !password){
+            throw Error('all fields must be filled')
+        }
+        if(!validator.isEmail(email)){
+            throw Error('invalid email')
+        }
+        if(!validator.isStrongPassword(password)){
+            throw Error('password is not strong enough')
+        }
         const exists = await User.find({
             email : email
         })
         if (exists.length > 0){
-            return res.status(409).json({message: "user already exists"})
+            throw Error("user already exists")
         }
         const hashedPassword  = await bcrypt.hash(password,10)
         const user = await User.create({
@@ -56,7 +57,7 @@ exports.signup = async (req,res)=>{
         console.log('user registered successfully')
         res.status(200).json({email,token})
     } catch (error) {
-        console.log('registration failed')
-        return res.status(500).json({message : "failded to register a user",error :error.message})
+        console.log(error)
+        return res.status(500).json({error: error.message})
     }
 }
