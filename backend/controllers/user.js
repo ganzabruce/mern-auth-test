@@ -7,8 +7,7 @@ const createToken = (_id) =>{
     return jwt.sign({_id},"hello",{expiresIn: '3d'})
 }
 exports.login = async (req,res)=>{
-    const {email , password} = req.body
-    
+    const {email , password} = req.body 
     try {
         if(!email || !password){
             throw Error('all fields must be filled')
