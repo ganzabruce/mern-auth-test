@@ -7,7 +7,8 @@ const Signup = () => {
     const handleSignup = async (e)=>{
         e.preventDefault()
         const data = {email, password}
-        await signup(email,password)
+        const option = 'signup'
+        await signup(email,password,option)
         }
   return (
     <>

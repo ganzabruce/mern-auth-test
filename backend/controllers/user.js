@@ -14,6 +14,9 @@ exports.login = async (req,res)=>{
             throw Error('all fields must be filled')
         }
         const user = await User.findOne({email: email})
+        if(!validator.isEmail(email)){
+            throw Error('invalid email')
+        }
         if(!user){
             throw Error ("email doesn't exist")
         }
