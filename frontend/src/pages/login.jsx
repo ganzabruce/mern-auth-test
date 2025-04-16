@@ -18,14 +18,12 @@ const Login = () => {
                 },  
                 body: JSON.stringify({ email, password }),
             });  
-        
-            if (!response.ok) {  
-                const res = await response.json();
-                throw new Error(res.error); 
-            }  
-        
             const res = await response.json();  
-            dispatch({ type: "login", payload: res }); 
+            if (!response.ok) {  
+                throw new Error(res.error); 
+            }else{
+                dispatch({ type: "login", payload: res }); 
+            }
         } catch (error) {  
             setError(error.message); 
         }  
