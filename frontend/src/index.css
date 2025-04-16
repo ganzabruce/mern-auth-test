@@ -66,3 +66,10 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+.error{
+  color: red;
+  border: 1px solid red;
+  padding: 3px;
+  font-size: 20px;
+  background: #e18c8c;
+}
