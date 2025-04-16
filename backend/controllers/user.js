@@ -23,8 +23,9 @@ exports.login = async (req,res)=>{
         }
         const token = createToken(user._id)
         res.status(200).json({email,token})
+        console.log('logged in successfully')
     } catch (error) {
-        res.status(500).json({error : error.message})
+        res.status(500).json({error:error.message})
     }
 
 
@@ -52,12 +53,11 @@ exports.signup = async (req,res)=>{
         const hashedPassword  = await bcrypt.hash(password,10)
         const user = await User.create({
             email,password: hashedPassword
-        })
+        }) 
         const token  = createToken(user._id)
         console.log('user registered successfully')
         res.status(200).json({email,token})
     } catch (error) {
-        console.log(error)
         return res.status(500).json({error: error.message})
     }
 }
