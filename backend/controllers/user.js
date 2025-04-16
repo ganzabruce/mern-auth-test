@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 const validator  = require('validator')
 
 const createToken = (_id) =>{
-    return jwt.sign({_id:_id},"hello",{expiresIn: '3d'})
+    return jwt.sign({_id},"hello",{expiresIn: '3d'})
 }
 exports.login = async (req,res)=>{
     const {email , password} = req.body
