@@ -24,6 +24,7 @@ export const UseSignup = () =>{
             }else{
                 localStorage.setItem('user',JSON.stringify(res))
                 dispatch({type: "signup",dispatch: res})
+                setIsLoading(false)
             }
         } catch (error) {
             setError(error.message)

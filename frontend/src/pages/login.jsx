@@ -15,7 +15,7 @@ const Login = () => {
         <input type="text" placeholder='email address' value={email} onChange={(e)=>{setEmail(e.target.value)}} />
         <input type="password" placeholder='password' value={password} onChange={(e)=>{setPassword(e.target.value)}} />
         <button>login</button>
-        {error && <div>{error}</div>}
+        {error && <div className='error'>{error}</div>}
     </form>
   )
 }

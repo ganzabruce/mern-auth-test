@@ -18,7 +18,7 @@ const Signup = () => {
         <button className={isLoading}>Signup</button>
     </form>
     <h1>
-        {error && <div>{error}</div>}
+        {error && <div className='error'>{error}</div>}
 
     </h1>
     </>

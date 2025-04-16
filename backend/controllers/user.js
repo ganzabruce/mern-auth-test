@@ -28,6 +28,7 @@ exports.login = async (req,res)=>{
         res.status(200).json({email,token})
         console.log('logged in successfully')
     } catch (error) {
+        console.log(error)
         res.status(500).json({error:error.message})
     }
 
