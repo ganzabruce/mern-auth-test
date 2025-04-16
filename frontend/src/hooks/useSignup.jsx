@@ -23,7 +23,7 @@ export const UseSignup = () =>{
                 throw Error(res.error)
             }else{
                 localStorage.setItem('user',JSON.stringify(res))
-                dispatch({type: "signup",dispatch: res})
+                dispatch({type: "signup",payload: res})
                 setIsLoading(false)
             }
         } catch (error) {
